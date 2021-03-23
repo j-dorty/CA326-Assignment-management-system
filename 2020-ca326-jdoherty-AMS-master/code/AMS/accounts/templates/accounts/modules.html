@@ -1,0 +1,25 @@
+{% extends 'accounts/studentDashboard.html' %}
+{% load static from static %}
+
+{% block dashboard_content %}
+
+{% if request.user.user_type == "TCH" %}
+
+    <h1>The modules you teach are: </h1>
+    <p>Teacher ID: {{student_id}}</p>
+    {% for module in taught_modules%}
+        <h2>Module Code: {{module.module_Id}}</h2>
+        <h3>Module title: {{module}}</h3>
+
+    {% endfor %}
+
+{% else %}
+    <h1>Your enrolled modules</h1>
+    <p>Student ID: {{student_id}}</p>
+    {% for module in modules%}
+        <h3>{{module}}</h3>
+    {% endfor %}
+    
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static from static %}
+{% block title %}Student Dashboard{% endblock %}
+{% block content %}
+
+    <head>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'simple-sidebar.css' %}" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">Dashboard</div>
+            <div class="list-group list-group-flush">
+                <a href="{% url 'modules' %}" class="list-group-item list-group-item-action bg-light">Modules</a>
+                <a href="{% url 'assignments' %}" class="list-group-item list-group-item-action bg-light">Assignments</a>
+                <a href="{% url 'results' %}" class="list-group-item list-group-item-action bg-light">Results</a>
+                <a href="{% url 'profile' %}" class="list-group-item list-group-item-action bg-light">Profile</a>
+            </div>
+        </div>
+        
+
+        <div id='dashboard_content', name='dashboard_content'>
+        {% block dashboard_content %} {% endblock %}
+        </div>
+
+    </div>
+
+
+
+
+
+{% endblock %}
+

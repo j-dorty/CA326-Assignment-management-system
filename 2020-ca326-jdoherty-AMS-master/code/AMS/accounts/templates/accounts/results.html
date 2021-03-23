@@ -1,0 +1,46 @@
+{% extends 'accounts/studentDashboard.html' %}
+{% load static from static %}
+
+{% block dashboard_content %}
+
+  
+{% if request.user.user_type == "TCH" %}
+
+    <p><h1>Make new Grading:</h1> <a href="assignments/uploadgrade">Upload a Grade</a></p>
+
+{% else %}
+
+    <h1>Your Results:</h1>
+    <p>Student ID: {{student_id}}</p>
+    
+        {% for result in results %}
+      
+        <table class="table table-bordered" >
+            <thead>
+                <tr>
+                <th scope="col1">Module ID</th>
+                <th scope="col2">Assignment ID</th>
+                <th scope="col3">Submission ID</th>
+                <th scope="col4">Result</th>
+                <th scope="col5">Feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="col1">{{result.module_id}}</th>
+                <td scope="col2">{{result.assignment_id}}</td>
+                <td scope="col3">{{result.submission_id}}</td>
+                <td scope="col4">{{result.result}}</td>
+                <td scope="col5">{{result.feedback}}</td>
+                </tr>
+                <tr>
+            </tbody>
+            </table>
+
+        {% endfor %}
+
+
+
+{% endif %}
+
+{% endblock %}

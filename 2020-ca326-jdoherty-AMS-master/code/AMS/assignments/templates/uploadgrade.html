@@ -1,0 +1,16 @@
+{% extends 'accounts/studentDashboard.html' %}
+{% load static from static %}
+
+{% block dashboard_content %}
+
+    <div class='upload-grade'>
+        <h2> Upload Assignment Grading</h2>
+        <form class='site-form' action="{% url 'assignments:new_grade' %}" method='post' enctype='multipart/form-data'>
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type='submit' value='Submit Feedback'>
+        </form>
+
+        <p></p>
+    </div>
+{% endblock %}

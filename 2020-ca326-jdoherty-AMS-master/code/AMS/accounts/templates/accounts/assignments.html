@@ -1,0 +1,73 @@
+{% extends 'accounts/studentDashboard.html' %}
+{% load static from static %}
+
+{% block dashboard_content %}
+
+{% if request.user.user_type == "TCH" %}
+
+    <h1>Your created Assignments are: </h1>
+    <p>Teacher ID: {{student_id}}</p>
+    <h3>Create new assignment:</h3>
+    <p><a href="assignments/uploadassignment">New Assignment</a></p>
+
+    {% for assignment, submissions in created_assignments.items%}
+        {% comment %} <h2>Module ID: {{assignmentmodule_id}}</h2>
+        <h3>Assignment ID: {{assignment.assignment_id}}</h3>
+        <h3>Assignment Title: {{assignment.title}}</h3>
+        <p>Task Description: {{assignment.description}}</p>
+        <p>Due: {{assignment.due_date}}</p> {% endcomment %}
+        <table class="table table-bordered" >
+            <thead>
+                <tr>
+                <th scope="col1">Module ID</th>
+                <th scope="col2">Assignment ID</th>
+                <th scope="col3">Assignment Title</th>
+                <th scope="col4">Task Description</th>
+                <th scope="col5">Due</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="col1">{{assignment.module_id}}</th>
+                <td scope="col2">{{assignment.assignment_id}}</td>
+                <td scope="col3">{{assignment.title}}</td>
+                <td scope="col4">{{assignment.description}}</td>
+                <td scope="col5">{{assignment.description}}</td>
+                </tr>
+                <tr>
+            </tbody>
+            </table>
+    {% for sub in submissions%}
+        <h4>Submission Title: {{sub.title}}</h4>
+        <p>Submission Uploaded at: {{sub.uploaded_at}}</p>
+        <p>Submitted by: {{sub.submitted_by}}</p>
+        <p>Assignment ID: {{sub.assignment_id}}</p>
+        <p>Module ID: {{sub.module_id}}</p>
+        <p>Submission ID: {{sub.submission_id}}</p>
+        <p><a href='{{MEDIA_URL}}{{sub.file.url}}' download>Download Submitted File</a></p>
+    {% endfor %}
+    {% endfor %}
+
+    {% else %}
+
+    <h1>Your upcoming Assignments: </h1>
+    <p>Student ID: {{student_id}}</p>
+    <p></p>
+
+
+    {% for entry in assignments%}
+    <h2>Module ID: {{entry.module_id}}</h2>
+    <h3>Assignment ID: {{entry.assignment_id}}</h3>
+    <p>Assignment Title: {{entry.title}}</p>
+    <p>Task Description: {{entry.description}}</p>
+    <p>Due: {{entry.due_date}}</p>
+
+       
+
+    <a href="assignments/uploadfile">Make Submission</a>
+    
+    {% endfor %}
+
+    {% endif %}
+
+{% endblock %}
